@@ -1,30 +1,42 @@
 # Launchpad Technical Challenge (Backend)
+## Assumptions
+* Set menu consists of only:
+    * Cheese Pizza
+    * Pepperoni Pizza
+    * Margherita Pizza
 
 ## Solution Outline
 ### Backend API (HTTP)
-* POST request for order taking
-* GET request to track order status from the backend
-* GET request to get order for up to one year
-### Backend Classes
-* OrderList class
-    * Array of Orders
-* Order class containing the following fields:
-    * (int) Quantity for each type of Pizza 
-    * (LocalDateTime) Datestamp
-    * (Status) Status stamp - Only Get function available
-* Status class/enum
+* POST request with endpoint '/orders' - Take order
+* GET request with endpoint '/orders/:id' - Track order status of specified order
+* GET request with endpoint '/orders' - Get receipt for orders for up to one year
 
-* Methods
-    * OrderList.AddOrder(Order)
-    * OrderList.RemoveOrdersBeyondOneYear()
-    * Order.GetStatusStamp()
-    * Constructors for OrderList() and Order(Quantity, Datestamp, Status == OrderReceived)
+### Features
+* UUID feature for each order
 
-## Potential Improvements
-* Apply Singleton pattern on the OrderList class since there should only be 1 constant OrderList used by the store
+### Model
+* Order Model:
+    * (Number) cheesePizzaQuantity
+    * (Number) pepperoniPizzaQuantity
+    * (Number) margheritaPizzaQuantity
+    * (String) orderStatus - value cannot be set by the API and is set to 'Order Received' by default
+    * (Date) orderDate - value cannot be set by the API and is set to the date when the order is made by default
+    * (String) orderID - value cannot be set by the API and is only generated when API endpoint is called
+
+## Considerations
+* Pizza customizations
+* Menu expansion
+
+## Potential Technical Improvements
 * Some unit tests for each class to test the functions
 * Exceptions
     * Exception thrown when there are selections to see receipt for orders beyond 1 year
-* Save the data into an SQL Database
-    * OrderList Table
-    * Order Table
+    * Exception thrown when there are no pizza quantities in the order
+* Construct a Status enum (reduce typo errors and easier change of values) with the following options:
+    * OrderReceived
+    * ToppingsAdded
+    * PizzaBaking
+    * PizzaReady
+* Implement async/await in the API implementations to increase system efficiency when accessing the database
+
+
