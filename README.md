@@ -53,6 +53,7 @@ Hence a login system is required beforehand so that the system can check if the 
     Use the Date to find the corresponding Order with the matching orderDate.
     Retrieve the Order.
     Send back the Order. 
+    NOTE: there may be multiple orders that have the same orderDates. Hence we will run a for loop and put the orders with the matching OrderDate into an Array, and return the Order Array. 
 
 * POST request with endpoint '/accounts/login' - For user to login
 * POST request with endpoint '/accounts/signup' - For user to sign up for an account
@@ -86,6 +87,8 @@ Hence a login system is required beforehand so that the system can check if the 
 ## Considerations
 * Pizza customizations
 * Menu expansion
+* Cash payment during collection instead of online payment
+* Order cancellation after order is made
 
 ## Potential Technical Improvements
 * Some unit tests for each class to test the functions
